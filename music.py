@@ -8,26 +8,84 @@ from torch.utils.data import Dataset, DataLoader
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+import sys
 from sklearn.model_selection import train_test_split
+import soundfile as sf
+
+##Checking if soundfile works## 
+##OUT: Error: Error opening '/work/tc062/tc062/manishav/Diss/Data/genres_original/jazz.00054.wav': Format not recognised.
+# file_path = '/work/tc062/tc062/manishav/Diss/Data/genres_original/jazz.00054.wav'
+
+# try:
+#     with sf.SoundFile(file_path) as file:
+#         print('Sample rate:', file.samplerate)
+#         print('Channels:', file.channels)
+#         print('Format:', file.format)
+#         print('Subtype:', file.subtype)
+# except Exception as e:
+#     print(f"Error: {e}")
+# sys.exit()
 
 # Path to the directory containing .wav files
 data_dir = 'Data/genres_original'
+# isExist = os.path.exists(data_dir)
+# print(isExist)
 
 # List all .wav files
 wav_files = glob.glob(os.path.join(data_dir, '*.wav'))
+#print(wav_files[:5]) #OUT: 'Data/genres_original/blues.00002.wav'
+
+
+# # Print the list of wav files found
+# print("List of .wav files:")
 # print(wav_files)
+
+# # Check permissions for each file
+# for wav_file in wav_files:
+#     # Check if the file exists
+#     if not os.path.exists(wav_file):
+#         print(f"File does not exist: {wav_file}")
+#         continue
+
+#     # Check if the file is readable
+#     if not os.access(wav_file, os.R_OK):
+#         print(f"File is not readable: {wav_file}")
+#         continue
+
+#     # Attempt to open the file
+#     try:
+#         with open(wav_file, 'rb') as f:
+#             print(f"Successfully opened: {wav_file}")
+#     except Exception as e:
+#         print(f"Error opening '{wav_file}': {e}")
+    
+# sys.exit() ## WAVS ARE READABLE: NOT THE ISSUE ##
 
 # Extract labels and file paths
 data = []
+# for root, dirs, files in os.walk(data_dir):
+#     for file in files:
+#         if file.endswith('.wav'):
+#             wav_file = os.path.join(root, file)
+#             genre, _ = os.path.splitext(file)
+#             genre = genre.split('.')[0]
+#             data.append((file, genre))
+
+##Trying this version. It outputs the whole path ie Data/genres_original/jazz.00087.wav instead of just jazz.00087.wav##
+##Leads to this error: raise LibsndfileError(err, prefix="Error opening {0!r}: ".format(self.name))
+##soundfile.LibsndfileError: Error opening 'Data/genres_original/jazz.00054.wav': Format not recognised.
+
 for root, dirs, files in os.walk(data_dir):
     for file in files:
         if file.endswith('.wav'):
             wav_file = os.path.join(root, file)
             genre, _ = os.path.splitext(file)
             genre = genre.split('.')[0]
-            data.append((file, genre))
+            data.append((wav_file, genre))
 
-print(data)
+# print(len(data))
+# print(data[:5])
+# sys.exit()
 
 # Convert to DataFrame
 df = pd.DataFrame(data, columns=['file_path', 'label'])
@@ -38,9 +96,12 @@ index_to_label = {idx: label for label, idx in label_to_index.items()}
 
 # Convert labels to indices
 df['label'] = df['label'].map(label_to_index)
-
+# print(len(df))
 # print("Genre to int mapping:")
 # print(label_to_index)
+# sys.exit()
+
+## data_dir path exists and correct no. of data items is printed ##
 
 class AudioUtil():
     @staticmethod
@@ -106,25 +167,27 @@ class GenreDataset(Dataset):
         return len(self.df)
 
     def __getitem__(self, idx):
-        file_path = self.df.iloc[idx, 0]
-        label = self.df.iloc[idx, 1]
-        # Convert the label to an integer if it's a string
-        if isinstance(label, str):
-            label = genre_to_int[label]
-            # Split the file path to get the file name and extension separately
-        file_dir, file_name = os.path.split(file_path)
-        file_name_parts = file_name.split('.')
-        # Assume the last part is the extension
-        file_ext = file_name_parts[-1]
+        file_path = self.df.iloc[idx, 0] #OUT: jazz.00065.wav
+        label = self.df.iloc[idx, 1] #OUT: jazz
+        # # Convert the label to an integer if it's a string
+        # if isinstance(label, str):
+        #     label = genre_to_int[label]
+        #     # Split the file path to get the file name and extension separately
+        # file_dir, file_name = os.path.split(file_path)
+        # file_name_parts = file_name.split('.')
+        # # Assume the last part is the extension
+        # file_ext = file_name_parts[-1]
         # Reconstruct the file path with the correct extension
-        corrected_file_path = os.path.join(file_dir, '.'.join(file_name_parts[:-1]) + '.' + file_ext)
-        try:
-            aud = AudioUtil.open(corrected_file_path)
-        except Exception as e:
-            print(f"Error opening file {corrected_file_path}: {e}")
-            return None, None
-        if aud is None:
-            return None, None
+        # corrected_file_path = os.path.join(file_path, '.'.join(file_name_parts[:-1]) + '.' + file_ext)
+        # try:
+        #     aud = AudioUtil.open(corrected_file_path)
+        # except Exception as e:
+        #     print(f"{e}")
+        #     return None, None
+        # if aud is None:
+        #     print(f"aud is none")
+        #     return None, None
+        aud = AudioUtil.open(file_path)
         aud = AudioUtil.resample(aud, self.sr)
         aud = AudioUtil.rechannel(aud, 1)
         aud = AudioUtil.pad_trunc(aud, self.duration)
@@ -208,5 +271,6 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, num_epoch
                 total += labels.size(0)
         val_acc = correct.double() / total
         print(f'Validation Accuracy: {val_acc:.4f}')
+
 
 train_model(model, train_loader, val_loader, criterion, optimizer, num_epochs=20)
