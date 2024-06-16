@@ -207,7 +207,7 @@ train_dataset = GenreDataset(train_df)
 val_dataset = GenreDataset(val_df)
 
 train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, drop_last=True)
-val_loader = DataLoader(val_dataset, batch_size=32, drop_last=True)
+val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False, drop_last=True)
 
 class AudioClassifier(nn.Module):
     def __init__(self):
@@ -217,19 +217,27 @@ class AudioClassifier(nn.Module):
         self.conv3 = nn.Conv2d(16, 32, kernel_size=3, stride=1, padding=1)
         self.conv4 = nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1)
         self.pool = nn.MaxPool2d(2, 2)
-        self.fc1 = nn.Linear(64 * 4 * 4, 128)
+        self.fc1 = nn.Linear(64 * 4 * 13, 128)
         self.fc2 = nn.Linear(128, 10)
         self.dropout = nn.Dropout(0.3)
     
     def forward(self, x):
+        # print(f"Input shape: {x.shape}")  # Debugging line
         x = self.pool(F.relu(self.conv1(x)))
+        # print(f"After conv1 and pool: {x.shape}")  # Debugging line
         x = self.pool(F.relu(self.conv2(x)))
+        # print(f"After conv2 and pool: {x.shape}")  # Debugging line
         x = self.pool(F.relu(self.conv3(x)))
+        # print(f"After conv3 and pool: {x.shape}")  # Debugging line
         x = self.pool(F.relu(self.conv4(x)))
-        x = x.view(-1, 64 * 4 * 4)
+        # print(f"After conv4 and pool: {x.shape}")  # Debugging line
+        x = x.view(x.size(0), -1) 
+        # print(f"After view: {x.shape}")  # Debugging line
         x = F.relu(self.fc1(x))
+        # print(f"After fc1: {x.shape}")  # Debugging line
         x = self.dropout(x)
         x = self.fc2(x)
+        # print(f"Output shape: {x.shape}")  # Debugging line
         return x
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -238,18 +246,18 @@ model = AudioClassifier().to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-def train_model(model, train_loader, val_loader, criterion, optimizer, num_epochs=20):
+def train_model(model, train_loader, val_loader, criterion, optimizer, num_epochs=20): ##change to 20 later
     for epoch in range(num_epochs):
         model.train()
         running_loss = 0.0
         for inputs, labels in train_loader:
+            # print(f"Training Input shape: {inputs.shape}, Labels shape: {labels.shape}")  # Debugging line
             inputs, labels = inputs.to(device), labels.to(device)
             optimizer.zero_grad()
             outputs = model(inputs)
+            # print(f"Training Outputs shape: {outputs.shape}")  # Debugging line
             if outputs.size(0) != labels.size(0):
                 print(f"Mismatch in batch sizes: outputs={outputs.size(0)}, labels={labels.size(0)}")
-                print(f"Outputs shape: {outputs.shape}")
-                print(f"Labels shape: {labels.shape}")
                 continue
             loss = criterion(outputs, labels)
             loss.backward()
