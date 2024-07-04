@@ -10,12 +10,12 @@ import numpy as np
 from sklearn.manifold import TSNE
 import matplotlib.pyplot as plt
 from datasets import load_dataset, Dataset, Audio
-from transformers import Wav2Vec2Processor, HubertForCTC
+from transformers import Wav2Vec2Processor, HubertModel
 from tqdm import tqdm
 import plotly.express as px
 import colorsys
 
-os.environ['HF_HOME'] = "/work/tc062/tc062/manishav/huggingface_cache"
+# os.environ['HF_HOME'] = "/work/tc062/tc062/manishav/huggingface_cache"
 
 # Load your datasets
 train_dir = '/work/tc062/tc062/manishav/huggingface_cache/datasets/speechcolab___gigaspeech/xs/0.0.0/0db31224ad43470c71b459deb2f2b40956b3a4edfde5fb313aaec69ec7b50d3c/gigaspeech-train.arrow'
@@ -47,8 +47,8 @@ class GenreDataset(DatasetTorch):
         
         sr = audio_data.get('sampling_rate', self.sr)
 
-        if sig.dim() == 1:
-            sig = sig.unsqueeze(0)
+        # Ensure sig is 1D
+        sig = sig.squeeze()
 
         label = item['category']
         file_path = audio_data.get('path', '')
@@ -67,9 +67,11 @@ train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_worker
 # val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False, num_workers=4, collate_fn=lambda x: tuple(zip(*x)))
 # test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False, num_workers=4, collate_fn=lambda x: tuple(zip(*x)))
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 # Load the HuBERT model and processor
 processor = Wav2Vec2Processor.from_pretrained("facebook/hubert-large-ls960-ft")
-model = HubertForCTC.from_pretrained("facebook/hubert-large-ls960-ft").to(device)
+model = HubertModel.from_pretrained("facebook/hubert-large-ls960-ft").to(device)
 
 def extract_hubert_embeddings(loader):
     embeddings = []
@@ -80,20 +82,43 @@ def extract_hubert_embeddings(loader):
     with torch.no_grad():
         for batch in tqdm(loader):
             inputs, labels, paths = batch
-            inputs = [processor(audio.numpy(), sampling_rate=16000, return_tensors="pt", padding=True).input_values for audio in inputs]
-            inputs = torch.cat(inputs).to(device)
             
-            outputs = model(inputs).last_hidden_state.mean(dim=1).cpu().numpy()
+            # Process each input separately
+            processed_inputs = []
+            for audio in inputs:
+                # Convert to numpy array if it's not already
+                if isinstance(audio, torch.Tensor):
+                    audio = audio.squeeze().numpy()
+                
+                # Process the audio
+                processed = processor(audio, sampling_rate=16000, return_tensors="pt", padding="longest")
+                processed_inputs.append(processed.input_values)
 
-            embeddings.append(outputs)
-            labels_list.append([label.item() for label in labels])
+            # Pad to the same length
+            max_length = max(input.shape[1] for input in processed_inputs)
+            padded_inputs = [F.pad(input, (0, max_length - input.shape[1])) for input in processed_inputs]
+            
+            # Stack the inputs
+            inputs = torch.cat(padded_inputs).to(device)
+
+            # Get the hidden states
+            outputs = model(inputs, output_hidden_states=True)
+            
+            # Use the last hidden state
+            hidden_states = outputs.hidden_states[-1]
+            
+            # Average over the time dimension
+            embeddings_batch = hidden_states.mean(dim=1).cpu().numpy()
+
+            embeddings.append(embeddings_batch)
+            labels_list.extend([label.item() for label in labels])
             file_paths.extend(paths)
 
     embeddings = np.concatenate(embeddings)
-    labels = np.concatenate(labels_list)
+    labels = np.array(labels_list)
 
     return embeddings, labels, file_paths
-
+    
 train_embeddings, train_labels, train_paths = extract_hubert_embeddings(train_loader)
 
 # T-SNE

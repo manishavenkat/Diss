@@ -1,0 +1,205 @@
+  0%|          | 0/294 [00:00<?, ?it/s]  0%|          | 1/294 [00:43<3:33:07, 43.64s/it]  2%|▏         | 6/294 [00:43<25:50,  5.38s/it]    3%|▎         | 10/294 [00:44<12:55,  2.73s/it]  5%|▍         | 14/294 [00:44<07:37,  1.63s/it]  6%|▌         | 18/294 [00:44<04:50,  1.05s/it]  7%|▋         | 22/294 [00:45<03:16,  1.38it/s]  9%|▉         | 26/294 [00:45<02:18,  1.94it/s] 10%|█         | 30/294 [00:46<01:40,  2.63it/s] 12%|█▏        | 34/294 [00:46<01:15,  3.47it/s] 13%|█▎        | 38/294 [00:46<00:59,  4.32it/s] 14%|█▍        | 42/294 [00:47<00:46,  5.46it/s] 16%|█▌        | 46/294 [00:47<00:38,  6.39it/s] 17%|█▋        | 50/294 [00:47<00:32,  7.43it/s] 18%|█▊        | 54/294 [00:48<00:28,  8.44it/s] 19%|█▉        | 57/294 [00:48<00:24,  9.63it/s] 20%|██        | 59/294 [00:48<00:24,  9.49it/s] 21%|██        | 62/294 [00:48<00:25,  8.92it/s] 22%|██▏       | 66/294 [00:49<00:23,  9.81it/s] 23%|██▎       | 69/294 [00:49<00:18, 11.94it/s] 24%|██▍       | 71/294 [00:49<00:21, 10.17it/s] 25%|██▌       | 74/294 [00:49<00:21, 10.05it/s] 27%|██▋       | 78/294 [00:50<00:18, 11.42it/s] 28%|██▊       | 81/294 [00:50<00:15, 13.43it/s] 28%|██▊       | 83/294 [00:50<00:15, 13.64it/s] 29%|██▉       | 85/294 [00:50<00:17, 12.09it/s] 30%|██▉       | 88/294 [00:50<00:14, 13.96it/s] 31%|███       | 90/294 [00:51<00:16, 12.41it/s] 31%|███▏      | 92/294 [00:51<00:17, 11.45it/s] 32%|███▏      | 94/294 [00:51<00:19, 10.12it/s] 33%|███▎      | 97/294 [00:51<00:20,  9.54it/s] 34%|███▍      | 101/294 [00:52<00:20,  9.64it/s] 36%|███▌      | 105/294 [00:52<00:18, 10.36it/s] 37%|███▋      | 109/294 [00:53<00:17, 10.37it/s] 38%|███▊      | 113/294 [00:53<00:18,  9.93it/s] 40%|███▉      | 117/294 [00:53<00:16, 10.95it/s] 41%|████      | 121/294 [00:54<00:16, 10.56it/s] 43%|████▎     | 125/294 [00:54<00:15, 11.02it/s] 44%|████▎     | 128/294 [00:54<00:12, 12.96it/s] 44%|████▍     | 130/294 [00:54<00:14, 11.19it/s] 45%|████▌     | 133/294 [00:55<00:13, 12.14it/s] 46%|████▋     | 136/294 [00:55<00:10, 14.52it/s] 47%|████▋     | 138/294 [00:55<00:10, 14.48it/s] 48%|████▊     | 140/294 [00:55<00:11, 13.23it/s] 48%|████▊     | 142/294 [00:55<00:10, 13.98it/s] 49%|████▉     | 144/294 [00:55<00:12, 12.03it/s] 50%|█████     | 148/294 [00:56<00:11, 12.38it/s] 51%|█████     | 150/294 [00:56<00:12, 11.84it/s] 52%|█████▏    | 152/294 [00:56<00:10, 12.95it/s] 52%|█████▏    | 154/294 [00:56<00:14,  9.85it/s] 53%|█████▎    | 157/294 [00:57<00:14,  9.75it/s] 55%|█████▍    | 161/294 [00:57<00:11, 11.53it/s] 56%|█████▌    | 165/294 [00:57<00:10, 12.64it/s] 57%|█████▋    | 169/294 [00:57<00:09, 12.85it/s] 59%|█████▉    | 173/294 [00:58<00:09, 12.68it/s] 60%|██████    | 177/294 [00:58<00:09, 12.42it/s] 62%|██████▏   | 181/294 [00:58<00:08, 13.34it/s] 63%|██████▎   | 185/294 [00:59<00:08, 12.54it/s] 64%|██████▍   | 189/294 [00:59<00:08, 12.69it/s] 66%|██████▌   | 193/294 [00:59<00:07, 13.03it/s] 67%|██████▋   | 197/294 [01:00<00:08, 12.10it/s] 68%|██████▊   | 201/294 [01:00<00:07, 11.73it/s] 69%|██████▉   | 203/294 [01:00<00:07, 12.22it/s] 70%|██████▉   | 205/294 [01:00<00:07, 12.17it/s] 70%|███████   | 207/294 [01:01<00:06, 13.12it/s] 71%|███████   | 209/294 [01:01<00:06, 12.86it/s] 72%|███████▏  | 211/294 [01:01<00:07, 11.15it/s] 72%|███████▏  | 213/294 [01:01<00:07, 11.21it/s] 73%|███████▎  | 216/294 [01:01<00:05, 14.29it/s] 74%|███████▍  | 218/294 [01:01<00:05, 13.51it/s] 75%|███████▍  | 220/294 [01:01<00:05, 14.21it/s] 76%|███████▌  | 222/294 [01:02<00:05, 13.26it/s] 76%|███████▌  | 224/294 [01:02<00:06, 11.54it/s] 77%|███████▋  | 227/294 [01:02<00:06, 10.28it/s] 79%|███████▊  | 231/294 [01:02<00:05, 12.19it/s] 79%|███████▉  | 233/294 [01:03<00:04, 13.07it/s] 80%|███████▉  | 235/294 [01:03<00:04, 12.45it/s] 81%|████████  | 237/294 [01:03<00:04, 13.78it/s] 81%|████████▏ | 239/294 [01:03<00:04, 11.97it/s] 83%|████████▎ | 243/294 [01:03<00:03, 13.15it/s] 84%|████████▎ | 246/294 [01:03<00:03, 15.99it/s] 84%|████████▍ | 248/294 [01:04<00:03, 14.99it/s] 85%|████████▌ | 250/294 [01:04<00:03, 13.93it/s] 86%|████████▌ | 252/294 [01:04<00:02, 14.59it/s] 86%|████████▋ | 254/294 [01:04<00:03, 11.69it/s] 87%|████████▋ | 256/294 [01:04<00:02, 12.68it/s] 88%|████████▊ | 258/294 [01:05<00:02, 12.16it/s] 88%|████████▊ | 260/294 [01:05<00:02, 12.91it/s] 89%|████████▉ | 262/294 [01:05<00:02, 13.50it/s] 90%|████████▉ | 264/294 [01:05<00:02, 14.62it/s] 90%|█████████ | 266/294 [01:05<00:02, 11.19it/s] 91%|█████████ | 268/294 [01:05<00:02, 11.82it/s] 92%|█████████▏| 270/294 [01:06<00:02, 11.19it/s] 93%|█████████▎| 272/294 [01:06<00:01, 11.10it/s] 93%|█████████▎| 274/294 [01:06<00:01, 11.95it/s] 94%|█████████▍| 276/294 [01:06<00:01, 11.49it/s] 95%|█████████▍| 278/294 [01:06<00:01, 11.85it/s] 95%|█████████▌| 280/294 [01:06<00:01, 12.02it/s] 96%|█████████▌| 282/294 [01:07<00:01, 11.27it/s] 97%|█████████▋| 285/294 [01:07<00:00, 11.42it/s] 98%|█████████▊| 287/294 [01:07<00:00, 12.19it/s] 98%|█████████▊| 289/294 [01:07<00:00, 11.04it/s]100%|█████████▉| 293/294 [01:07<00:00, 12.17it/s]100%|██████████| 294/294 [01:08<00:00,  4.32it/s]
+Epoch 0/0, Loss: 1.7070
+Validation Accuracy: 0.0000
+/work/tc062/tc062/manishav/.venv/diss/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1517: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/work/tc062/tc062/manishav/.venv/diss/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1517: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/work/tc062/tc062/manishav/.venv/diss/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1517: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no true nor predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/work/tc062/tc062/manishav/.venv/diss/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1517: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/work/tc062/tc062/manishav/.venv/diss/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1517: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/work/tc062/tc062/manishav/.venv/diss/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1517: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no true nor predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/work/tc062/tc062/manishav/.venv/diss/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1517: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/work/tc062/tc062/manishav/.venv/diss/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1517: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/work/tc062/tc062/manishav/.venv/diss/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1517: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no true nor predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+Embeddings shape: (25619, 128)
+Labels shape: (25619,)
+Predictions shape: (25619,)
+Number of file paths: 25619
+Test Set Accuracy: 0.0000
+Confusion matrix saved as 'confusion_matrix.png'
+Confusion Matrix:
+[[   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [ 131    0    0    0    0    0  603    0    0    0    0   52    0    0
+  9960  333    0    0    0    0    0 4291    0    0 6914    0    0    0
+  3335]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0    0    0    0    0    0    0    0    0    0    0    0    0    0
+     0]]
+
+Classification Report:
+                           precision    recall  f1-score   support
+
+       People  and  Blogs       0.00      0.00      0.00       0.0
+                 Business       0.00      0.00      0.00       0.0
+Nonprofits  and  Activism       0.00      0.00      0.00       0.0
+                    Crime       0.00      0.00      0.00       0.0
+                  History       0.00      0.00      0.00       0.0
+       Pets  and  Animals       0.00      0.00      0.00       0.0
+        News and Politics       0.00      0.00      0.00       0.0
+        Travel and Events       0.00      0.00      0.00       0.0
+          Kids and Family       0.00      0.00      0.00       0.0
+                  Leisure       0.00      0.00      0.00       0.0
+                      N/A       0.00      0.00      0.00   25619.0
+                   Comedy       0.00      0.00      0.00       0.0
+      News  and  Politics       0.00      0.00      0.00       0.0
+                   Sports       0.00      0.00      0.00       0.0
+                     Arts       0.00      0.00      0.00       0.0
+ Science  and  Technology       0.00      0.00      0.00       0.0
+     Autos  and  Vehicles       0.00      0.00      0.00       0.0
+   Science and Technology       0.00      0.00      0.00       0.0
+         People and Blogs       0.00      0.00      0.00       0.0
+                    Music       0.00      0.00      0.00       0.0
+      Society and Culture       0.00      0.00      0.00       0.0
+                Education       0.00      0.00      0.00       0.0
+        Howto  and  Style       0.00      0.00      0.00       0.0
+     Film  and  Animation       0.00      0.00      0.00       0.0
+                   Gaming       0.00      0.00      0.00       0.0
+            Entertainment       0.00      0.00      0.00       0.0
+      Travel  and  Events       0.00      0.00      0.00       0.0
+       Health and Fitness       0.00      0.00      0.00       0.0
+                audiobook       0.00      0.00      0.00       0.0
+
+                 accuracy                           0.00   25619.0
+                macro avg       0.00      0.00      0.00   25619.0
+             weighted avg       0.00      0.00      0.00   25619.0
+
+
+Categories present in the test set:
+Label 10: N/A
+Label distribution in test set:
+10    25619
+Name: count, dtype: int64
+
+Categories not present in the test set:
+Crime
+Howto  and  Style
+Sports
+Music
+History
+Kids and Family
+Health and Fitness
+People  and  Blogs
+Business
+People and Blogs
+Entertainment
+Travel  and  Events
+Comedy
+News  and  Politics
+Nonprofits  and  Activism
+Travel and Events
+Film  and  Animation
+Leisure
+Science  and  Technology
+Education
+Pets  and  Animals
+News and Politics
+Science and Technology
+Gaming
+Arts
+Society and Culture
+audiobook
+Autos  and  Vehicles
+
+Note: The T-SNE visualization only shows categories present in the test set.
+Traceback (most recent call last):
+  File "/work/tc062/tc062/manishav/Diss/classification_gs_all_test.py", line 415, in <module>
+    fig.write_html(plot_file)
+  File "/work/tc062/tc062/manishav/.venv/diss/lib/python3.10/site-packages/plotly/basedatatypes.py", line 3720, in write_html
+    return pio.write_html(self, *args, **kwargs)
+  File "/work/tc062/tc062/manishav/.venv/diss/lib/python3.10/site-packages/plotly/io/_html.py", line 535, in write_html
+    path.write_text(html_str, "utf-8")
+  File "/work/y07/shared/cirrus-software/miniconda3/22.11.1-1-py310-gpu/lib/python3.10/pathlib.py", line 1154, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+  File "/work/y07/shared/cirrus-software/miniconda3/22.11.1-1-py310-gpu/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+FileNotFoundError: [Errno 2] No such file or directory: 'gs_embeddings/tsne_embeddings_gs_test_set_20e.html'
+srun: error: r2i6n3: task 0: Exited with exit code 1
+srun: launch/slurm: _step_signal: Terminating StepId=5785734.0
