@@ -22,25 +22,36 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import colorsys
 import seaborn as sns
-
-
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, f1_score, precision_score, confusion_matrix
 
 
 train_dir = '/work/tc062/tc062/manishav/huggingface_cache/datasets/speechcolab___gigaspeech/xs/0.0.0/0db31224ad43470c71b459deb2f2b40956b3a4edfde5fb313aaec69ec7b50d3c/gigaspeech-train.arrow'
-val_dir = '/work/tc062/tc062/manishav/huggingface_cache/datasets/speechcolab___gigaspeech/xs/0.0.0/0db31224ad43470c71b459deb2f2b40956b3a4edfde5fb313aaec69ec7b50d3c/gigaspeech-validation.arrow'
-test_dir = '/work/tc062/tc062/manishav/huggingface_cache/datasets/speechcolab___gigaspeech/xs/0.0.0/0db31224ad43470c71b459deb2f2b40956b3a4edfde5fb313aaec69ec7b50d3c/gigaspeech-test.arrow'
-
 
 # Load the full datasets
 train_dataset = Dataset.from_file(train_dir)
 train_dataset = train_dataset.cast_column("audio", Audio(sampling_rate=16000))
 
-val_dataset = Dataset.from_file(val_dir)
-val_dataset = val_dataset.cast_column("audio", Audio(sampling_rate=16000))
+print('getting category names')
 
-test_dataset = Dataset.from_file(test_dir)
-test_dataset = test_dataset.cast_column("audio", Audio(sampling_rate=16000))
+category_names = train_dataset.features['category'].names
+# Create a dictionary mapping indices to category names
+category_dict = {i: name for i, name in enumerate(category_names)}
+all_categories = list(category_dict.values())
 
+print('loaded dataset')
+
+def stratified_train_test_split(dataset, test_size=0.2, random_state=42):
+    df = dataset.to_pandas()
+    train_df, test_df = train_test_split(df, test_size=test_size, stratify=df['category'], random_state=random_state)
+    train_dataset = Dataset.from_pandas(train_df)
+    test_dataset = Dataset.from_pandas(test_df)
+    return train_dataset, test_dataset
+
+# Split the original training data
+train_dataset, new_test_dataset = stratified_train_test_split(train_dataset)
+
+print('split data')
 
 class AudioUtil():
     @staticmethod
@@ -158,21 +169,15 @@ class GenreDataset(DatasetTorch):
 
         return sgram, torch.tensor(label, dtype=torch.long), file_path
 
-category_names = train_dataset.features['category'].names
-# Create a dictionary mapping indices to category names
-category_dict = {i: name for i, name in enumerate(category_names)}
-
 # Create dataset objects
 train_dataset = GenreDataset(train_dataset)
-val_dataset = GenreDataset(val_dataset)
-test_dataset = GenreDataset(test_dataset)
+test_dataset = GenreDataset(new_test_dataset)  # Use the new test set
 
-
+print('starting dataloader')
 # Create DataLoaders
 train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=4, collate_fn=lambda x: tuple(zip(*x)))
-val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False, num_workers=4, collate_fn=lambda x: tuple(zip(*x)))
 test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False, num_workers=4, collate_fn=lambda x: tuple(zip(*x)))
-
+print('ending dataloader')
 
 class AudioClassifier(nn.Module):
     def __init__(self, num_classes=29):
@@ -216,10 +221,8 @@ model = AudioClassifier().to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-
-def train_model(model, train_loader, val_loader, criterion, optimizer, num_epochs=1):
+def train_model(model, train_loader, criterion, optimizer, num_epochs=2000):
     train_losses = []
-    val_accuracies = []
     
     for epoch in range(num_epochs):
         model.train()
@@ -242,25 +245,6 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, num_epoch
         epoch_loss = running_loss / len(train_loader.dataset)
         train_losses.append(epoch_loss)
         print(f'Epoch {epoch}/{num_epochs - 1}, Loss: {epoch_loss:.4f}')
-        
-        model.eval()
-        correct = 0
-        total = 0
-        with torch.no_grad():
-            for batch in val_loader:
-                inputs, labels, _ = batch
-                inputs = torch.stack(inputs)  # Stack the inputs into a single tensor
-                labels = torch.stack(labels)
-                if inputs.dim() == 3:
-                    inputs = inputs.unsqueeze(1)
-                inputs, labels = inputs.to(device), labels.to(device)
-                outputs, _ = model(inputs)
-                _, preds = torch.max(outputs, 1)
-                correct += torch.sum(preds == labels.data)
-                total += labels.size(0)
-        val_acc = correct.double() / total
-        val_accuracies.append(val_acc.item())
-        print(f'Validation Accuracy: {val_acc:.4f}')
     
     # Save the loss plot
     plt.figure(figsize=(10, 5))
@@ -269,10 +253,11 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, num_epoch
     plt.ylabel('Loss')
     plt.title('Training Loss over Epochs')
     plt.legend()
-    plt.savefig(os.path.join("gs-embeddings", "loss_plot_500epochs.png"))
+    plt.savefig(os.path.join("gs-embeddings", f"loss_plot_{num_epochs}epochs.png"))
     plt.close()
 
-train_model(model, train_loader, val_loader, criterion, optimizer, num_epochs=1)
+# Call the function
+train_model(model, train_loader, criterion, optimizer, num_epochs=2000)
 
 # Extract embeddings from test set
 model.eval()
@@ -309,20 +294,18 @@ print("Number of file paths:", len(file_paths))
 
 # After running predictions on the test set
 
-# Ensure we're using all categories
-all_categories = list(category_dict.values())
-num_categories = len(all_categories)
+accuracy = accuracy_score(labels, predictions)
+f1 = f1_score(labels, predictions, average='weighted')
+precision = precision_score(labels, predictions, average='weighted')
 
-# Calculate accuracy
-accuracy = np.mean(predictions == labels)
 print(f"Test Set Accuracy: {accuracy:.4f}")
+print(f"Test Set F1 Score: {f1:.4f}")
+print(f"Test Set Precision: {precision:.4f}")
 
-# Calculate confusion matrix
-from sklearn.metrics import confusion_matrix, classification_report
+# Confusion Matrix
+cm = confusion_matrix(labels, predictions)
 
-cm = confusion_matrix(labels, predictions, labels=range(num_categories))
-class_report = classification_report(labels, predictions, target_names=all_categories, labels=range(num_categories))
-
+# Plot confusion matrix
 plt.figure(figsize=(25, 20))
 sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
             xticklabels=all_categories,
@@ -333,35 +316,14 @@ plt.title('Confusion Matrix', fontsize=16)
 plt.xticks(rotation=90, fontsize=10)
 plt.yticks(rotation=0, fontsize=10)
 plt.tight_layout()
-plt.savefig('confusion_matrix_TESTdelete.png', dpi=300)
+plt.savefig('confusion_matrix_test_2kepochs.png', dpi=300)
 plt.close()
 
-print("Confusion matrix saved as 'confusion_matrix.png'")
+print("Confusion matrix saved as 'confusion_matrix_2kepochs_test.png'")
 
-print("Confusion Matrix:")
-print(cm)
-print("\nClassification Report:")
-print(class_report)
+from sklearn.manifold import TSNE
+import plotly.express as px
 
-# Print categories present in the test set
-unique_labels = np.unique(labels)
-present_categories = [category_dict[label] for label in unique_labels]
-print("\nCategories present in the test set:")
-for label, category in zip(unique_labels, present_categories):
-    print(f"Label {label}: {category}")
-print("Label distribution in test set:")
-print(pd.Series(labels).value_counts())
-
-# Print categories not present in the test set
-missing_categories = set(all_categories) - set(present_categories)
-print("\nCategories not present in the test set:")
-for category in missing_categories:
-    print(category)
-
-# Note about visualization
-print("\nNote: The T-SNE visualization only shows categories present in the test set.")
-
-# Rest of the T-SNE code as before
 # T-SNE
 tsne = TSNE(n_components=2, random_state=42)
 tsne_results = tsne.fit_transform(embeddings)
@@ -405,15 +367,16 @@ fig.update_layout(
     )
 )
 
-output_dir = 'gs_embeddings'
-
 # Adjust marker size and opacity
 fig.update_traces(marker=dict(size=5, opacity=0.7))
 
+output_dir = 'gs-embeddings'
+
 # Save the plot as an HTML file
-plot_file = os.path.join(output_dir, "tsne_embeddings_gs_test_set_20e.html")
+plot_file = os.path.join(output_dir, "tsne_embeddings_test_set.html")
 fig.write_html(plot_file)
 print(f"Saved interactive plot to {plot_file}")
 
 # Show the plot in a browser
 fig.show()
+

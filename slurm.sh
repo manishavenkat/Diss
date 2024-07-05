@@ -4,7 +4,7 @@
 #SBATCH --qos=gpu
 #SBATCH --account=tc062-pool2
 #SBATCH --job-name=classification_gs_sample
-#SBATCH --time=00:20:00
+#SBATCH --time=00:30:00
 #SBATCH --nodes=1
 #SBATCH --gres=gpu:1
 
@@ -18,4 +18,4 @@ export MPLCONFIGDIR="/work/tc062/tc062/manishav/.config/matplotlib"
 
 source /work/tc062/tc062/manishav/.venv/diss/bin/activate 
 # python -m pip install "numpy<2"
-srun python /work/tc062/tc062/manishav/Diss/classification_gs_all_test.py
+srun python /work/tc062/tc062/manishav/Diss/classification_gs_all_no-audiobook-train-soundtest.py
