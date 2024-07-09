@@ -1,0 +1,40 @@
+Epoch 0/19, Loss: 2.0281
+Validation Accuracy: 0.3021
+Epoch 1/19, Loss: 1.7121
+Validation Accuracy: 0.4062
+Epoch 2/19, Loss: 1.4788
+Validation Accuracy: 0.4896
+Epoch 3/19, Loss: 1.3574
+Validation Accuracy: 0.4583
+Epoch 4/19, Loss: 1.2323
+Validation Accuracy: 0.5365
+Epoch 5/19, Loss: 1.1037
+Validation Accuracy: 0.5260
+Epoch 6/19, Loss: 1.0459
+Validation Accuracy: 0.5573
+Epoch 7/19, Loss: 0.9416
+Validation Accuracy: 0.6302
+Epoch 8/19, Loss: 0.7331
+Validation Accuracy: 0.6510
+Epoch 9/19, Loss: 0.6230
+Validation Accuracy: 0.6510
+Epoch 10/19, Loss: 0.4944
+Validation Accuracy: 0.6510
+Epoch 11/19, Loss: 0.4163
+Validation Accuracy: 0.6250
+Epoch 12/19, Loss: 0.3963
+Validation Accuracy: 0.6250
+Epoch 13/19, Loss: 0.2911
+Validation Accuracy: 0.6406
+Epoch 14/19, Loss: 0.2184
+Validation Accuracy: 0.6458
+Epoch 15/19, Loss: 0.1605
+Validation Accuracy: 0.6042
+Epoch 16/19, Loss: 0.1927
+Validation Accuracy: 0.5990
+Epoch 17/19, Loss: 0.1434
+Validation Accuracy: 0.6615
+Epoch 18/19, Loss: 0.0949
+Validation Accuracy: 0.6615
+Epoch 19/19, Loss: 0.0962
+Validation Accuracy: 0.6719

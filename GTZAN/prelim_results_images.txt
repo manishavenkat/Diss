@@ -1,0 +1,415 @@
+Epoch 1/20, Loss: 2.3166
+Validation Loss: 2.2688, Accuracy: 0.1050
+/home/tc062/tc062/manishav/anaconda3/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/tc062/tc062/manishav/anaconda3/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/tc062/tc062/manishav/anaconda3/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+              precision    recall  f1-score   support
+
+     country       0.00      0.00      0.00        20
+       metal       0.00      0.00      0.00        20
+         pop       0.00      0.00      0.00        20
+        jazz       0.00      0.00      0.00        20
+   classical       0.00      0.00      0.00        20
+      hiphop       0.00      0.00      0.00        20
+       disco       0.00      0.00      0.00        20
+      reggae       0.07      0.05      0.06        20
+       blues       0.11      1.00      0.19        20
+        rock       0.00      0.00      0.00        20
+
+    accuracy                           0.10       200
+   macro avg       0.02      0.11      0.03       200
+weighted avg       0.02      0.10      0.03       200
+
+Epoch 2/20, Loss: 2.1583
+Validation Loss: 2.0362, Accuracy: 0.2100
+/home/tc062/tc062/manishav/anaconda3/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/tc062/tc062/manishav/anaconda3/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/tc062/tc062/manishav/anaconda3/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+              precision    recall  f1-score   support
+
+     country       0.00      0.00      0.00        20
+       metal       0.40      0.90      0.55        20
+         pop       0.10      0.05      0.07        20
+        jazz       0.00      0.00      0.00        20
+   classical       0.42      0.50      0.45        20
+      hiphop       0.00      0.00      0.00        20
+       disco       0.00      0.00      0.00        20
+      reggae       0.00      0.00      0.00        20
+       blues       0.09      0.50      0.16        20
+        rock       0.20      0.15      0.17        20
+
+    accuracy                           0.21       200
+   macro avg       0.12      0.21      0.14       200
+weighted avg       0.12      0.21      0.14       200
+
+Epoch 3/20, Loss: 1.9975
+Validation Loss: 1.9961, Accuracy: 0.2500
+/home/tc062/tc062/manishav/anaconda3/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/tc062/tc062/manishav/anaconda3/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/tc062/tc062/manishav/anaconda3/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+              precision    recall  f1-score   support
+
+     country       0.12      0.35      0.18        20
+       metal       0.46      0.90      0.61        20
+         pop       0.40      0.10      0.16        20
+        jazz       0.16      0.35      0.22        20
+   classical       0.31      0.75      0.43        20
+      hiphop       0.00      0.00      0.00        20
+       disco       0.00      0.00      0.00        20
+      reggae       0.00      0.00      0.00        20
+       blues       0.00      0.00      0.00        20
+        rock       0.25      0.05      0.08        20
+
+    accuracy                           0.25       200
+   macro avg       0.17      0.25      0.17       200
+weighted avg       0.17      0.25      0.17       200
+
+Epoch 4/20, Loss: 1.9221
+Validation Loss: 1.9164, Accuracy: 0.3100
+/home/tc062/tc062/manishav/anaconda3/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/tc062/tc062/manishav/anaconda3/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/tc062/tc062/manishav/anaconda3/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+              precision    recall  f1-score   support
+
+     country       0.00      0.00      0.00        20
+       metal       0.53      0.90      0.67        20
+         pop       0.17      0.25      0.20        20
+        jazz       0.28      0.35      0.31        20
+   classical       0.50      0.70      0.58        20
+      hiphop       0.00      0.00      0.00        20
+       disco       0.16      0.25      0.19        20
+      reggae       0.24      0.60      0.34        20
+       blues       0.50      0.05      0.09        20
+        rock       0.00      0.00      0.00        20
+
+    accuracy                           0.31       200
+   macro avg       0.24      0.31      0.24       200
+weighted avg       0.24      0.31      0.24       200
+
+Epoch 5/20, Loss: 1.8132
+Validation Loss: 1.7936, Accuracy: 0.3750
+/home/tc062/tc062/manishav/anaconda3/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/tc062/tc062/manishav/anaconda3/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/tc062/tc062/manishav/anaconda3/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+              precision    recall  f1-score   support
+
+     country       0.57      0.20      0.30        20
+       metal       0.72      0.90      0.80        20
+         pop       0.27      0.20      0.23        20
+        jazz       0.56      0.45      0.50        20
+   classical       0.53      0.90      0.67        20
+      hiphop       0.00      0.00      0.00        20
+       disco       0.23      0.40      0.29        20
+      reggae       0.17      0.15      0.16        20
+       blues       0.22      0.50      0.30        20
+        rock       0.25      0.05      0.08        20
+
+    accuracy                           0.38       200
+   macro avg       0.35      0.38      0.33       200
+weighted avg       0.35      0.38      0.33       200
+
+Epoch 6/20, Loss: 1.6761
+Validation Loss: 1.6727, Accuracy: 0.4500
+              precision    recall  f1-score   support
+
+     country       0.41      0.35      0.38        20
+       metal       0.64      0.90      0.75        20
+         pop       0.40      0.10      0.16        20
+        jazz       0.67      0.30      0.41        20
+   classical       0.59      0.85      0.69        20
+      hiphop       0.41      0.85      0.56        20
+       disco       0.30      0.50      0.38        20
+      reggae       0.00      0.00      0.00        20
+       blues       0.47      0.40      0.43        20
+        rock       0.25      0.25      0.25        20
+
+    accuracy                           0.45       200
+   macro avg       0.41      0.45      0.40       200
+weighted avg       0.41      0.45      0.40       200
+
+Epoch 7/20, Loss: 1.5688
+Validation Loss: 1.5021, Accuracy: 0.4250
+              precision    recall  f1-score   support
+
+     country       0.24      0.25      0.24        20
+       metal       0.82      0.90      0.86        20
+         pop       0.50      0.25      0.33        20
+        jazz       0.45      0.45      0.45        20
+   classical       0.64      0.80      0.71        20
+      hiphop       0.50      0.30      0.37        20
+       disco       0.30      0.30      0.30        20
+      reggae       0.24      0.55      0.33        20
+       blues       0.67      0.20      0.31        20
+        rock       0.28      0.25      0.26        20
+
+    accuracy                           0.42       200
+   macro avg       0.46      0.42      0.42       200
+weighted avg       0.46      0.42      0.42       200
+
+Epoch 8/20, Loss: 1.4277
+Validation Loss: 1.5346, Accuracy: 0.4600
+/home/tc062/tc062/manishav/anaconda3/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/tc062/tc062/manishav/anaconda3/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/tc062/tc062/manishav/anaconda3/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+              precision    recall  f1-score   support
+
+     country       0.41      0.45      0.43        20
+       metal       0.72      0.90      0.80        20
+         pop       0.42      0.40      0.41        20
+        jazz       0.41      0.35      0.38        20
+   classical       0.56      1.00      0.71        20
+      hiphop       0.60      0.45      0.51        20
+       disco       0.71      0.25      0.37        20
+      reggae       0.36      0.50      0.42        20
+       blues       0.00      0.00      0.00        20
+        rock       0.19      0.30      0.24        20
+
+    accuracy                           0.46       200
+   macro avg       0.44      0.46      0.43       200
+weighted avg       0.44      0.46      0.43       200
+
+Epoch 9/20, Loss: 1.3698
+Validation Loss: 1.4671, Accuracy: 0.5100
+              precision    recall  f1-score   support
+
+     country       0.33      0.15      0.21        20
+       metal       0.86      0.90      0.88        20
+         pop       0.80      0.40      0.53        20
+        jazz       0.60      0.15      0.24        20
+   classical       0.72      0.90      0.80        20
+      hiphop       0.53      0.80      0.64        20
+       disco       0.42      0.75      0.54        20
+      reggae       0.40      0.10      0.16        20
+       blues       0.31      0.65      0.42        20
+        rock       0.35      0.30      0.32        20
+
+    accuracy                           0.51       200
+   macro avg       0.53      0.51      0.47       200
+weighted avg       0.53      0.51      0.47       200
+
+Epoch 10/20, Loss: 1.2931
+Validation Loss: 1.3996, Accuracy: 0.4800
+              precision    recall  f1-score   support
+
+     country       0.27      0.60      0.37        20
+       metal       0.90      0.90      0.90        20
+         pop       0.38      0.45      0.41        20
+        jazz       0.34      0.50      0.41        20
+   classical       0.76      0.80      0.78        20
+      hiphop       0.58      0.55      0.56        20
+       disco       0.67      0.20      0.31        20
+      reggae       0.36      0.40      0.38        20
+       blues       0.67      0.10      0.17        20
+        rock       0.50      0.30      0.37        20
+
+    accuracy                           0.48       200
+   macro avg       0.54      0.48      0.47       200
+weighted avg       0.54      0.48      0.47       200
+
+Epoch 11/20, Loss: 1.2303
+Validation Loss: 1.3775, Accuracy: 0.5250
+              precision    recall  f1-score   support
+
+     country       0.38      0.50      0.43        20
+       metal       0.74      0.85      0.79        20
+         pop       0.67      0.40      0.50        20
+        jazz       0.44      0.55      0.49        20
+   classical       0.75      0.90      0.82        20
+      hiphop       0.57      0.85      0.68        20
+       disco       0.83      0.25      0.38        20
+      reggae       0.32      0.30      0.31        20
+       blues       0.47      0.45      0.46        20
+        rock       0.25      0.20      0.22        20
+
+    accuracy                           0.53       200
+   macro avg       0.54      0.53      0.51       200
+weighted avg       0.54      0.53      0.51       200
+
+Epoch 12/20, Loss: 1.1606
+Validation Loss: 1.3422, Accuracy: 0.5500
+              precision    recall  f1-score   support
+
+     country       0.43      0.30      0.35        20
+       metal       0.94      0.85      0.89        20
+         pop       0.62      0.50      0.56        20
+        jazz       0.36      0.65      0.46        20
+   classical       0.67      0.90      0.77        20
+      hiphop       0.51      0.90      0.65        20
+       disco       0.86      0.30      0.44        20
+      reggae       0.27      0.15      0.19        20
+       blues       0.57      0.40      0.47        20
+        rock       0.50      0.55      0.52        20
+
+    accuracy                           0.55       200
+   macro avg       0.57      0.55      0.53       200
+weighted avg       0.57      0.55      0.53       200
+
+Epoch 13/20, Loss: 1.0987
+Validation Loss: 1.3283, Accuracy: 0.5300
+              precision    recall  f1-score   support
+
+     country       1.00      0.10      0.18        20
+       metal       0.65      0.85      0.74        20
+         pop       0.75      0.45      0.56        20
+        jazz       0.50      0.45      0.47        20
+   classical       0.77      0.85      0.81        20
+      hiphop       0.50      0.85      0.63        20
+       disco       0.33      0.75      0.46        20
+      reggae       0.60      0.30      0.40        20
+       blues       0.50      0.50      0.50        20
+        rock       0.36      0.20      0.26        20
+
+    accuracy                           0.53       200
+   macro avg       0.60      0.53      0.50       200
+weighted avg       0.60      0.53      0.50       200
+
+Epoch 14/20, Loss: 1.0108
+Validation Loss: 1.2912, Accuracy: 0.6150
+              precision    recall  f1-score   support
+
+     country       0.52      0.60      0.56        20
+       metal       0.94      0.80      0.86        20
+         pop       0.89      0.40      0.55        20
+        jazz       0.65      0.55      0.59        20
+   classical       0.66      0.95      0.78        20
+      hiphop       0.61      0.70      0.65        20
+       disco       0.62      0.65      0.63        20
+      reggae       0.48      0.50      0.49        20
+       blues       0.53      0.45      0.49        20
+        rock       0.48      0.55      0.51        20
+
+    accuracy                           0.61       200
+   macro avg       0.64      0.61      0.61       200
+weighted avg       0.64      0.61      0.61       200
+
+Epoch 15/20, Loss: 0.9791
+Validation Loss: 1.4094, Accuracy: 0.4850
+              precision    recall  f1-score   support
+
+     country       0.43      0.15      0.22        20
+       metal       0.94      0.80      0.86        20
+         pop       0.90      0.45      0.60        20
+        jazz       0.26      0.75      0.39        20
+   classical       0.67      0.50      0.57        20
+      hiphop       0.67      0.30      0.41        20
+       disco       0.46      0.85      0.60        20
+      reggae       0.34      0.55      0.42        20
+       blues       0.75      0.15      0.25        20
+        rock       0.58      0.35      0.44        20
+
+    accuracy                           0.48       200
+   macro avg       0.60      0.48      0.48       200
+weighted avg       0.60      0.48      0.48       200
+
+Epoch 16/20, Loss: 0.9343
+Validation Loss: 1.2055, Accuracy: 0.6150
+              precision    recall  f1-score   support
+
+     country       0.43      0.60      0.50        20
+       metal       0.90      0.90      0.90        20
+         pop       0.65      0.65      0.65        20
+        jazz       0.73      0.55      0.63        20
+   classical       0.72      0.90      0.80        20
+      hiphop       0.77      0.50      0.61        20
+       disco       0.62      0.50      0.56        20
+      reggae       0.53      0.45      0.49        20
+       blues       0.55      0.60      0.57        20
+        rock       0.42      0.50      0.45        20
+
+    accuracy                           0.61       200
+   macro avg       0.63      0.61      0.62       200
+weighted avg       0.63      0.61      0.62       200
+
+Epoch 17/20, Loss: 0.8650
+Validation Loss: 1.3750, Accuracy: 0.5950
+              precision    recall  f1-score   support
+
+     country       0.50      0.75      0.60        20
+       metal       0.89      0.80      0.84        20
+         pop       0.52      0.65      0.58        20
+        jazz       0.80      0.40      0.53        20
+   classical       0.75      0.90      0.82        20
+      hiphop       0.57      0.80      0.67        20
+       disco       0.56      0.70      0.62        20
+      reggae       0.44      0.40      0.42        20
+       blues       1.00      0.10      0.18        20
+        rock       0.45      0.45      0.45        20
+
+    accuracy                           0.59       200
+   macro avg       0.65      0.59      0.57       200
+weighted avg       0.65      0.59      0.57       200
+
+Epoch 18/20, Loss: 0.8150
+Validation Loss: 1.2840, Accuracy: 0.6000
+              precision    recall  f1-score   support
+
+     country       0.47      0.45      0.46        20
+       metal       0.86      0.95      0.90        20
+         pop       0.86      0.30      0.44        20
+        jazz       0.71      0.50      0.59        20
+   classical       0.72      0.90      0.80        20
+      hiphop       0.67      0.80      0.73        20
+       disco       0.57      0.60      0.59        20
+      reggae       0.58      0.35      0.44        20
+       blues       0.48      0.50      0.49        20
+        rock       0.37      0.65      0.47        20
+
+    accuracy                           0.60       200
+   macro avg       0.63      0.60      0.59       200
+weighted avg       0.63      0.60      0.59       200
+
+Epoch 19/20, Loss: 0.7091
+Validation Loss: 1.3500, Accuracy: 0.5550
+              precision    recall  f1-score   support
+
+     country       0.50      0.25      0.33        20
+       metal       0.69      0.90      0.78        20
+         pop       1.00      0.25      0.40        20
+        jazz       0.55      0.60      0.57        20
+   classical       0.79      0.75      0.77        20
+      hiphop       0.67      0.70      0.68        20
+       disco       0.45      0.75      0.57        20
+      reggae       0.42      0.50      0.45        20
+       blues       0.34      0.50      0.41        20
+        rock       0.64      0.35      0.45        20
+
+    accuracy                           0.56       200
+   macro avg       0.60      0.55      0.54       200
+weighted avg       0.60      0.56      0.54       200
+
+Epoch 20/20, Loss: 0.6306
+Validation Loss: 1.2940, Accuracy: 0.5850
+              precision    recall  f1-score   support
+
+     country       0.48      0.50      0.49        20
+       metal       0.94      0.85      0.89        20
+         pop       0.52      0.55      0.54        20
+        jazz       0.73      0.55      0.63        20
+   classical       0.72      0.90      0.80        20
+      hiphop       0.64      0.45      0.53        20
+       disco       0.75      0.30      0.43        20
+      reggae       0.34      0.60      0.44        20
+       blues       0.61      0.55      0.58        20
+        rock       0.48      0.60      0.53        20
+
+    accuracy                           0.58       200
+   macro avg       0.62      0.58      0.59       200
+weighted avg       0.62      0.58      0.59       200
