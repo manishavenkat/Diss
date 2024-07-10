@@ -4,7 +4,7 @@
 #SBATCH --qos=gpu
 #SBATCH --account=tc062-pool2
 #SBATCH --job-name=classification_gs_sample
-#SBATCH --time=01:00:00
+#SBATCH --time=05:00:00
 #SBATCH --nodes=1
 #SBATCH --gres=gpu:1
 
