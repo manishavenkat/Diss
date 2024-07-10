@@ -266,7 +266,7 @@ print('starting training')
 loss_values = []
 
 # Training loop
-num_epochs = 200
+num_epochs = 100
 for epoch in range(num_epochs):
     model.train()
     total_loss = 0
@@ -293,7 +293,7 @@ plt.legend()
 plt.tight_layout()
 
 loss_output_dir = 'outputs/loss'
-plot_file = os.path.join(loss_output_dir, "loss_exp1_200epochs.png")
+plot_file = os.path.join(loss_output_dir, "loss_exp2_100epochs.png")
 plt.savefig(plot_file)
 print(f"Saved loss plot to {plot_file}")
 
@@ -361,7 +361,7 @@ fig.update_layout(
 )
 
 # Save the PCA plot as an HTML file
-pca_plot_file = os.path.join(output_dir, "pca_exp2_200epochs.html")
+pca_plot_file = os.path.join(output_dir, "pca_exp2_100epochs.html")
 fig.write_html(pca_plot_file)
 print(f"Saved interactive PCA plot to {pca_plot_file}")
 

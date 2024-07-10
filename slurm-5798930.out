@@ -1,0 +1,76 @@
+STAGE:2024-07-10 12:45:53 2685270:2685270 ActivityProfilerController.cpp:294] Completed Stage: Warm Up
+loading train_dir
+loaded dataset
+split data
+running AudioUtil
+running AudioDataset
+running ConvAutoencoder
+running TotalLoss
+loading train and test data
+finished loading
+starting training
+  0%|          | 0/235 [00:00<?, ?it/s]  0%|          | 0/235 [00:08<?, ?it/s]
+STAGE:2024-07-10 12:46:02 2685270:2685270 ActivityProfilerController.cpp:300] Completed Stage: Collection
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+enumerate(DataLoader)#_SingleProcessDataLoaderIter._...         2.97%     254.972ms        53.39%        4.588s        4.588s       0.000us         0.00%       0.000us       0.000us             1  
+autograd::engine::evaluate_function: ConvolutionBack...         0.00%     147.000us        29.41%        2.527s     280.824ms       0.000us         0.00%       2.562ms     284.667us             9  
+                                   ConvolutionBackward0         0.00%      61.000us        29.41%        2.527s     280.808ms       0.000us         0.00%       2.562ms     284.667us             9  
+                             aten::convolution_backward        23.61%        2.029s        29.41%        2.527s     280.801ms       2.380ms        44.19%       2.562ms     284.667us             9  
+                     torchaudio::sox_io_load_audio_file        14.34%        1.232s        14.57%        1.252s      39.134ms       0.000us         0.00%       0.000us       0.000us            32  
+                                      aten::convolution         0.00%     132.000us        12.37%        1.063s     118.153ms       0.000us         0.00%     616.000us      68.444us             9  
+                                     aten::_convolution         0.11%       9.560ms        12.37%        1.063s     118.139ms       0.000us         0.00%     616.000us      68.444us             9  
+                                       cudaLaunchKernel         9.88%     849.220ms         9.88%     849.220ms       2.535ms       0.000us         0.00%       0.000us       0.000us           335  
+                                           aten::conv2d         0.00%      24.000us         8.82%     757.918ms     252.639ms       0.000us         0.00%     510.000us     170.000us             3  
+                                aten::cudnn_convolution         0.88%      75.316ms         8.71%     748.183ms     249.394ms     359.000us         6.67%     359.000us     119.667us             3  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 8.593s
+Self CUDA time total: 5.386ms
+
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+autograd::engine::evaluate_function: ConvolutionBack...         0.00%     147.000us        29.41%        2.527s     280.824ms       0.000us         0.00%       2.562ms     284.667us             9  
+                                   ConvolutionBackward0         0.00%      61.000us        29.41%        2.527s     280.808ms       0.000us         0.00%       2.562ms     284.667us             9  
+                             aten::convolution_backward        23.61%        2.029s        29.41%        2.527s     280.801ms       2.380ms        44.19%       2.562ms     284.667us             9  
+                                               aten::to         0.17%      14.860ms         0.23%      19.951ms      40.551us       0.000us         0.00%       1.012ms       2.057us           492  
+                                         aten::_to_copy         0.03%       2.461ms         0.06%       5.200ms      13.904us       0.000us         0.00%       1.012ms       2.706us           374  
+                                            aten::copy_         0.18%      15.822ms         0.20%      17.020ms      38.858us       1.012ms        18.79%       1.012ms       2.311us           438  
+                       Memcpy HtoD (Pageable -> Device)         0.00%       0.000us         0.00%       0.000us       0.000us       1.012ms        18.79%       1.012ms     506.000us             2  
+void cudnn::detail::dgrad2d_alg1_1<float, 0, 5, 6, 4...         0.00%       0.000us         0.00%       0.000us       0.000us     818.000us        15.19%     818.000us     163.600us             5  
+                                      aten::convolution         0.00%     132.000us        12.37%        1.063s     118.153ms       0.000us         0.00%     616.000us      68.444us             9  
+                                     aten::_convolution         0.11%       9.560ms        12.37%        1.063s     118.139ms       0.000us         0.00%     616.000us      68.444us             9  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 8.593s
+Self CUDA time total: 5.386ms
+
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ---------------------------------------------------------------------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  Source Location                                                              
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ---------------------------------------------------------------------------  
+                                            aten::copy_         0.00%      18.000us         0.01%       1.187ms       1.187ms       1.011ms        18.77%       1.011ms       1.011ms             1  <built-in method to of Tensor object at 0x151d1b60e7f0>                      
+                                                                                                                                                                                                     /work/tc062/tc062/manishav/Diss/SSL/exp1.py(290): <module>                   
+                                                                                                                                                                                                                                                                                  
+                       Memcpy HtoD (Pageable -> Device)         0.00%       0.000us         0.00%       0.000us       0.000us       1.011ms        18.77%       1.011ms       1.011ms             1  <built-in method to of Tensor object at 0x151d1b60e7f0>                      
+                                                                                                                                                                                                     /work/tc062/tc062/manishav/Diss/SSL/exp1.py(290): <module>                   
+                                                                                                                                                                                                                                                                                  
+                             aten::convolution_backward         0.00%     297.000us         0.00%     380.000us     380.000us     995.000us        18.47%       1.017ms       1.017ms             1  <built-in method conv2d of type object at 0x151ddcbfd460>                    
+                                                                                                                                                                                                     torch/nn/modules/conv.py(454): _conv_forward                                 
+                                                                                                                                                                                                     torch/nn/modules/conv.py(462): forward                                       
+                                                                                                                                                                                                     nn.Module: Conv2d_2                                                          
+                                                                                                                                                                                                     torch/nn/modules/container.py(202): forward                                  
+                                                                                                                                                                                                                                                                                  
+                             aten::convolution_backward         0.03%       2.493ms         0.03%       2.585ms       2.585ms     866.000us        16.08%     922.000us     922.000us             1  <built-in method conv2d of type object at 0x151ddcbfd460>                    
+                                                                                                                                                                                                     torch/nn/modules/conv.py(454): _conv_forward                                 
+                                                                                                                                                                                                     torch/nn/modules/conv.py(462): forward                                       
+                                                                                                                                                                                                     nn.Module: Conv2d_1                                                          
+                                                                                                                                                                                                     torch/nn/modules/container.py(202): forward                                  
+                                                                                                                                                                                                                                                                                  
+void cudnn::detail::dgrad2d_alg1_1<float, 0, 5, 6, 4...         0.00%       0.000us         0.00%       0.000us       0.000us     775.000us        14.39%     775.000us     775.000us             1  ...in method run_backward of torch._C._EngineBase object at 0x151dffa57340>  
+                                                                                                                                                                                                     torch/_tensor.py(429): backward                                              
+                                                                                                                                                                                                     /work/tc062/tc062/manishav/Diss/SSL/exp1.py(290): <module>                   
+                                                                                                                                                                                                                                                                                  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ---------------------------------------------------------------------------  
+Self CPU time total: 8.593s
+Self CUDA time total: 5.386ms
+

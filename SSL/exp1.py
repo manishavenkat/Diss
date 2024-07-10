@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from torch.utils.data import Dataset as DatasetTorch
+from torch.profiler import profile, ProfilerActivity
 import torch.nn.functional as F
 import numpy as np
 from sklearn.manifold import TSNE
@@ -18,7 +19,6 @@ import os
 import matplotlib.pyplot as plt
 import plotly.express as px
 from plotly.subplots import make_subplots
-
 
 print('loading train_dir')
 
@@ -264,9 +264,32 @@ print('starting training')
 
 loss_values = []
 
-# Training loop
-num_epochs = 200
-for epoch in range(num_epochs):
+# # Manisha Training loop (slow)
+# num_epochs = 200
+# for epoch in range(num_epochs):
+#     model.train()
+#     total_loss = 0
+#     for batch in tqdm(train_loader):
+#         audio, _, _, _ = batch
+#         audio = audio.to(device)  
+#         optimizer.zero_grad()
+#         decoded, latent, cluster_logits = model(audio)
+#         loss = criterion(decoded, audio, latent, cluster_logits)
+#         loss_values.append(loss.item())
+#         loss.backward()
+#         optimizer.step()
+#         total_loss += loss.item()
+#     print(f"Epoch {epoch+1}/{num_epochs}, Loss: {total_loss/len(train_loader):.4f}")
+
+## Andrea Training Loop
+
+num_epochs = 1
+
+#this substitutes the training loop
+
+with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA],
+             with_stack=True) as prof:
+
     model.train()
     total_loss = 0
     for batch in tqdm(train_loader):
@@ -279,7 +302,11 @@ for epoch in range(num_epochs):
         loss.backward()
         optimizer.step()
         total_loss += loss.item()
-    print(f"Epoch {epoch+1}/{num_epochs}, Loss: {total_loss/len(train_loader):.4f}")
+        break
+print(prof.key_averages(group_by_input_shape=True).table(sort_by="cpu_time_total", row_limit=10))
+print(prof.key_averages().table(sort_by="cuda_time_total", row_limit=10))
+print(prof.key_averages(group_by_stack_n=5).table(sort_by="self_cuda_time_total", row_limit=5))
+exit()
 
 epochs = list(range(1, len(loss_values) + 1))
 plt.figure(figsize=(10, 6))
@@ -292,7 +319,7 @@ plt.legend()
 plt.tight_layout()
 
 loss_output_dir = 'outputs/loss'
-plot_file = os.path.join(loss_output_dir, "loss_exp1.png")
+plot_file = os.path.join(loss_output_dir, "loss_exp1_1epochs.png")
 plt.savefig(plot_file)
 print(f"Saved loss plot to {plot_file}")
 
@@ -425,7 +452,7 @@ fig.update_layout(
 output_dir = 'outputs/tsne'
 
 # Save the plot as an HTML file
-plot_file = os.path.join(output_dir, "tsne_exp1_legend_200epochs.html")
+plot_file = os.path.join(output_dir, "tsne_exp1_legend_1epoch.html")
 fig.write_html(plot_file)
 print(f"Saved interactive plot to {plot_file}")
 
