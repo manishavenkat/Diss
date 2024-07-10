@@ -258,7 +258,7 @@ print('starting training')
 
 loss_values = []
 # Manisha Training loop (slow)
-num_epochs = 2
+num_epochs = 40
 
 for epoch in range(num_epochs):
     model.train()
@@ -314,7 +314,7 @@ plt.tight_layout()
 plt.show()
 
 loss_output_dir = 'outputs/loss'
-plot_file = os.path.join(loss_output_dir, "loss_exp1_1epochs.png")
+plot_file = os.path.join(loss_output_dir, "loss_exp3_40epochs.png")
 plt.savefig(plot_file)
 print(f"Saved loss plot to {plot_file}")
 
@@ -447,7 +447,7 @@ fig.update_layout(
 output_dir = 'outputs/tsne'
 
 # Save the plot as an HTML file
-plot_file = os.path.join(output_dir, "tsne_exp1_legend_1epoch.html")
+plot_file = os.path.join(output_dir, "tsne_exp3_40epochs.html")
 fig.write_html(plot_file)
 print(f"Saved interactive plot to {plot_file}")
 
