@@ -20,13 +20,31 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 from plotly.subplots import make_subplots
 
+def preprocess_and_save(dataset, output_dir, max_ms=30000, n_mels=64, n_fft=1024, hop_len=None):
+    os.makedirs(output_dir, exist_ok=True)
+    
+    for idx in tqdm(range(len(dataset)), desc="Pre-processing audio"):
+        item = dataset[idx]
+        audio_file = item['audio']['path']
+        
+        # Open and process the audio
+        aud = AudioUtil.open(audio_file)
+        reaud = AudioUtil.resample(aud, 16000)
+        rechan = AudioUtil.rechannel(reaud, 1)
+        dur_aud = AudioUtil.pad_trunc(rechan, max_ms)
+        spect = AudioUtil.spectro_gram(dur_aud, n_mels=n_mels, n_fft=n_fft, hop_len=hop_len)
+        spect = spect.unsqueeze(0)
+        
+        # Save the processed spectrogram
+        output_file = os.path.join(output_dir, f"{idx}.pt")
+        torch.save({
+            'spectrogram': spect,
+            'category': item['category'],
+            'file_path': item['audio']['path'],
+            'title': item['title']
+        }, output_file)
+
 print('loading train_dir')
-
-train_dir = '/work/tc062/tc062/manishav/huggingface_cache/datasets/speechcolab___gigaspeech/xs/0.0.0/0db31224ad43470c71b459deb2f2b40956b3a4edfde5fb313aaec69ec7b50d3c/gigaspeech-train.arrow'
-
-# Load the full datasets
-train_data = Dataset.from_file(train_dir)
-train_data = train_data.cast_column("audio", Audio(sampling_rate=16000))
 
 # all_categories = []
 # category_names = train_data.features['category'].names
@@ -34,16 +52,6 @@ train_data = train_data.cast_column("audio", Audio(sampling_rate=16000))
 # all_category_names = [category_dict[cat] for cat in all_categories]
 
 print('loaded dataset')
-
-def stratified_train_test_split(dataset, test_size=0.2, random_state=42):
-    df = dataset.to_pandas()
-    train_df, test_df = train_test_split(df, test_size=test_size, stratify=df['category'], random_state=random_state)
-    train_data = Dataset.from_pandas(train_df)
-    test_data = Dataset.from_pandas(test_df)
-    return train_data, test_data
-
-# Split the original training data
-train_data, test_data = stratified_train_test_split(train_data)
 
 print('split data')
 
@@ -105,42 +113,17 @@ class AudioUtil():
 print('running AudioDataset')
 
 class AudioDataset(DatasetTorch):
-    def __init__(self, data, max_ms=30000, n_mels=64, n_fft=1024, hop_len=None):
-        self.data = data
-        self.max_ms = max_ms
-        self.n_mels = n_mels
-        self.n_fft = n_fft
-        self.hop_len = hop_len
+    def __init__(self, preprocessed_dir):
+        self.preprocessed_dir = preprocessed_dir
+        self.file_list = sorted([f for f in os.listdir(preprocessed_dir) if f.endswith('.pt')])
 
     def __len__(self):
-        return len(self.data)
+        return len(self.file_list)
 
     def __getitem__(self, idx):
-        item = self.data[idx]
-        audio_file = item['audio']['path']
-        
-        # Open the audio file
-        aud = AudioUtil.open(audio_file)
-        
-        # Resample
-        reaud = AudioUtil.resample(aud, 16000)
-
-                # Rechannel
-        rechan = AudioUtil.rechannel(reaud, 1)
-        
-        # Pad or truncate
-        dur_aud = AudioUtil.pad_trunc(rechan, self.max_ms)
-        
-        # Create spectrogram
-        spect = AudioUtil.spectro_gram(dur_aud, n_mels=self.n_mels, n_fft=self.n_fft, hop_len=self.hop_len)
-        
-        # Add channel dimension for the model
-        spect = spect.unsqueeze(0)
-
-        category = item['category']
-        file_path = item['audio']['path']
-        title = item['title']
-        return spect, category, file_path, title
+        file_path = os.path.join(self.preprocessed_dir, self.file_list[idx])
+        data = torch.load(file_path)
+        return data['spectrogram'], data['category'], data['file_path'], data['title']
 
 print('running ConvAutoencoder')
 
@@ -202,7 +185,7 @@ class ConvAutoencoder(nn.Module):
     def forward(self, x):
         encoded = self.encoder(x)
         latent = encoded.squeeze(-1).squeeze(-1)  # Remove spatial dimensions
-        # print(f"latent shape: {latent.shape}")
+        # print(f"latent shape: {latent.shape}") OUT: torch.Size([32, 64])
         decoded = self.decoder(encoded)
         # print(f"decoded shape: {decoded.shape}")
         cluster_logits = self.clustering_head(latent)
@@ -240,9 +223,29 @@ class TotalLoss(nn.Module):
 
 print('loading train and test data')
 
-# Create DataLoaders
-train_dataset = AudioDataset(train_data)
-test_dataset = AudioDataset(test_data)
+train_dir = '/work/tc062/tc062/manishav/huggingface_cache/datasets/speechcolab___gigaspeech/xs/0.0.0/0db31224ad43470c71b459deb2f2b40956b3a4edfde5fb313aaec69ec7b50d3c/gigaspeech-train.arrow'
+
+def stratified_train_test_split(dataset, test_size=0.2, random_state=42):
+    df = dataset.to_pandas()
+    train_df, test_df = train_test_split(df, test_size=test_size, stratify=df['category'], random_state=random_state)
+    train_data = Dataset.from_pandas(train_df)
+    test_data = Dataset.from_pandas(test_df)
+    return train_data, test_data
+
+# Load the full datasets
+train_data = Dataset.from_file(train_dir)
+train_data = train_data.cast_column("audio", Audio(sampling_rate=16000))
+train_data, test_data = stratified_train_test_split(train_data)
+
+# # After splitting the data
+# print('Preprocessing train data')
+# preprocess_and_save(train_data, 'preprocessed_train_data')
+# print('Preprocessing test data')
+# preprocess_and_save(test_data, 'preprocessed_test_data')
+
+# Create DataLoaders with preprocessed data
+train_dataset = AudioDataset('SSL/preprocessed_train_data')
+test_dataset = AudioDataset('SSL/preprocessed_test_data')
 train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
 
@@ -314,7 +317,7 @@ plt.tight_layout()
 plt.show()
 
 loss_output_dir = 'outputs/loss'
-plot_file = os.path.join(loss_output_dir, "loss_exp3_40epochs.png")
+plot_file = os.path.join(loss_output_dir, "loss_exp3_40epochsv2.png")
 plt.savefig(plot_file)
 print(f"Saved loss plot to {plot_file}")
 
@@ -447,7 +450,7 @@ fig.update_layout(
 output_dir = 'outputs/tsne'
 
 # Save the plot as an HTML file
-plot_file = os.path.join(output_dir, "tsne_exp3_40epochs.html")
+plot_file = os.path.join(output_dir, "tsne_exp3_40epochsv2.html")
 fig.write_html(plot_file)
 print(f"Saved interactive plot to {plot_file}")
 

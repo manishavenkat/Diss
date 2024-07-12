@@ -1,0 +1,85 @@
+Splitting Data into 80-20 Test-Val Split
+Processing waveform inputs
+Starting Training
+Epoch 0, Train Loss: 2.0546, Val Loss: 1.8747, Val Accuracy: 0.2812
+Epoch 1, Train Loss: 1.7737, Val Loss: 1.6653, Val Accuracy: 0.3854
+Epoch 2, Train Loss: 1.6187, Val Loss: 1.5500, Val Accuracy: 0.3698
+Epoch 3, Train Loss: 1.4989, Val Loss: 1.3297, Val Accuracy: 0.5052
+Epoch 4, Train Loss: 1.3581, Val Loss: 1.3784, Val Accuracy: 0.4688
+Epoch 5, Train Loss: 1.2845, Val Loss: 1.2192, Val Accuracy: 0.5260
+Epoch 6, Train Loss: 1.1360, Val Loss: 1.1891, Val Accuracy: 0.5625
+Epoch 7, Train Loss: 1.0183, Val Loss: 1.1150, Val Accuracy: 0.5573
+Epoch 8, Train Loss: 0.9229, Val Loss: 1.2516, Val Accuracy: 0.5417
+Epoch 9, Train Loss: 0.8325, Val Loss: 1.1655, Val Accuracy: 0.5938
+Epoch 10, Train Loss: 0.6715, Val Loss: 1.1095, Val Accuracy: 0.5990
+Epoch 11, Train Loss: 0.6604, Val Loss: 1.1829, Val Accuracy: 0.6042
+Epoch 12, Train Loss: 0.5730, Val Loss: 1.2156, Val Accuracy: 0.6146
+Epoch 13, Train Loss: 0.4561, Val Loss: 1.1711, Val Accuracy: 0.6146
+Epoch 14, Train Loss: 0.3155, Val Loss: 1.3160, Val Accuracy: 0.6198
+Epoch 15, Train Loss: 0.2747, Val Loss: 1.3252, Val Accuracy: 0.6562
+Epoch 16, Train Loss: 0.2579, Val Loss: 1.4582, Val Accuracy: 0.6250
+Epoch 17, Train Loss: 0.2195, Val Loss: 1.5293, Val Accuracy: 0.6146
+Epoch 18, Train Loss: 0.1617, Val Loss: 1.6870, Val Accuracy: 0.6042
+Epoch 19, Train Loss: 0.1817, Val Loss: 1.6373, Val Accuracy: 0.6354
+Epoch 20, Train Loss: 0.1598, Val Loss: 1.7350, Val Accuracy: 0.6302
+Early stopping triggered after 21 epochs
+Evaluating Model on Val Set
+  0%|          | 0/6 [00:00<?, ?it/s] 17%|█▋        | 1/6 [00:00<00:01,  4.82it/s] 33%|███▎      | 2/6 [00:00<00:00,  4.93it/s] 50%|█████     | 3/6 [00:00<00:00,  5.04it/s] 67%|██████▋   | 4/6 [00:00<00:00,  5.11it/s] 83%|████████▎ | 5/6 [00:00<00:00,  5.07it/s]100%|██████████| 6/6 [00:01<00:00,  4.99it/s]100%|██████████| 6/6 [00:01<00:00,  5.00it/s]
+Overall Accuracy: 0.6302
+Overall Precision: 0.6463
+Overall Recall: 0.6302
+Overall F1-score: 0.6201
+
+Per-class breakdown:
+blues:
+  Accuracy: 0.6302
+  Precision: 0.7143
+  Recall: 0.7500
+  F1-score: 0.7317
+classical:
+  Accuracy: 0.6302
+  Precision: 0.7826
+  Recall: 0.9474
+  F1-score: 0.8571
+country:
+  Accuracy: 0.6302
+  Precision: 0.4783
+  Recall: 0.6471
+  F1-score: 0.5500
+disco:
+  Accuracy: 0.6302
+  Precision: 0.4667
+  Recall: 0.3500
+  F1-score: 0.4000
+hiphop:
+  Accuracy: 0.6302
+  Precision: 0.6667
+  Recall: 0.6316
+  F1-score: 0.6486
+jazz:
+  Accuracy: 0.6302
+  Precision: 0.6364
+  Recall: 0.7000
+  F1-score: 0.6667
+metal:
+  Accuracy: 0.6302
+  Precision: 0.7273
+  Recall: 0.8000
+  F1-score: 0.7619
+pop:
+  Accuracy: 0.6302
+  Precision: 1.0000
+  Recall: 0.6111
+  F1-score: 0.7586
+reggae:
+  Accuracy: 0.6302
+  Precision: 0.4333
+  Recall: 0.6500
+  F1-score: 0.5200
+rock:
+  Accuracy: 0.6302
+  Precision: 0.5714
+  Recall: 0.2105
+  F1-score: 0.3077
+Making T-SNE
+Training, Validation, Evaluation and Visualization Complete
