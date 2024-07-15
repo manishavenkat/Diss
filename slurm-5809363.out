@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/work/tc062/tc062/manishav/Diss/explore_gs.py", line 9, in <module>
+    audio_lengths = dataset['end_time'] - dataset['begin_time']
+TypeError: string indices must be integers
+srun: error: r2i4n0: task 0: Exited with exit code 1
+srun: launch/slurm: _step_signal: Terminating StepId=5809363.0
