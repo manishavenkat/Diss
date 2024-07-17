@@ -1,9 +1,0 @@
-['People  and  Blogs', 'Business', 'Nonprofits  and  Activism', 'Crime', 'History', 'Pets  and  Animals', 'News and Politics', 'Travel and Events', 'Kids and Family', 'Leisure', 'N/A', 'Comedy', 'News  and  Politics', 'Sports', 'Arts', 'Science  and  Technology', 'Autos  and  Vehicles', 'Science and Technology', 'People and Blogs', 'Music', 'Society and Culture', 'Education', 'Howto  and  Style', 'Film  and  Animation', 'Gaming', 'Entertainment', 'Travel  and  Events', 'Health and Fitness', 'audiobook']
-1. Average audio length: 3.91 seconds
-   Total audio length: 464363.66 seconds
-Traceback (most recent call last):
-  File "/work/tc062/tc062/manishav/Diss/explore_gs.py", line 26, in <module>
-    # Unique categories and their labels
-TypeError: 'ClassLabel' object is not iterable
-srun: error: r2i6n6: task 0: Exited with exit code 1
-srun: launch/slurm: _step_signal: Terminating StepId=5809816.0
