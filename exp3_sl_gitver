@@ -167,7 +167,7 @@ class AudioClassifier(nn.Module):
 
 ## Stratified train-test split on ONE preprocessed folder by fraction of data ##
 
-def stratified_train_test_split(metadata_file, fraction=0.10, test_size=0.20, random_state=42):
+def stratified_train_test_split(metadata_file, fraction=0.15, test_size=0.20, random_state=42):
     # Specify the categories to include
     global categories_to_include
     print(f"Categories to include: {categories_to_include}")
@@ -234,7 +234,7 @@ def stratified_train_test_split(metadata_file, fraction=0.10, test_size=0.20, ra
 
 # Usage
 preprocessed_dir = 'preprocessed_data'
-train_indices, test_indices, category_mapping, reverse_category_mapping, filtered_metadata = stratified_train_test_split('metadata.csv', test_size=0.2, fraction=0.10)
+train_indices, test_indices, category_mapping, reverse_category_mapping, filtered_metadata = stratified_train_test_split('metadata.csv', test_size=0.2, fraction=0.15)
 
 print('done stratifying')
 
@@ -256,6 +256,23 @@ model = AudioClassifier(num_classes=len(categories_to_include)).to(device)
 
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
+
+print(model)
+
+# Print model's state_dict
+print("Model's state_dict:")
+for param_tensor in model.state_dict():
+    print(param_tensor, "\t", model.state_dict()[param_tensor].size())
+
+# Print optimizer's state_dict
+print("Optimizer's state_dict:")
+for var_name in optimizer.state_dict():
+    print(var_name, "\t", optimizer.state_dict()[var_name])
+
+# Define the file path where the model will be saved
+model_path = 'SL/exp3_sl.pt'
+# Save the model's state dictionary to the specified file path
+torch.save(model.state_dict(), model_path)
 
 def train_model(model, train_loader, criterion, optimizer, num_epochs=1):
     train_losses = []
@@ -289,7 +306,7 @@ def train_model(model, train_loader, criterion, optimizer, num_epochs=1):
     plt.ylabel('Loss')
     plt.title('Training Loss over Epochs')
     plt.legend()
-    plt.savefig(os.path.join("outputs/loss", f"loss_plot_{num_epochs}epochs_exp3_sl_25%.png"))
+    plt.savefig(os.path.join("outputs/loss", f"loss_plot_{num_epochs}epochs_exp3_sl_15%.png"))
     plt.close()
 
 # Train the model
@@ -413,7 +430,7 @@ plt.title('Confusion Matrix for Test Set', fontsize=16)
 plt.xticks(rotation=90, fontsize=10)
 plt.yticks(rotation=0, fontsize=10)
 plt.tight_layout()
-plt.savefig('confusion_matrix_exp3_sl_1epochs_25%.png', dpi=300)
+plt.savefig('confusion_matrix_exp3_sl_1epochs_15%.png', dpi=300)
 plt.close()
 
 print("saved confusion_matrix_exp1_sl.png")
@@ -460,7 +477,7 @@ fig.update_layout(
 fig.update_traces(marker=dict(size=5, opacity=0.7))
 
 output_dir = 'outputs/tsne'
-plot_file = os.path.join(output_dir, "tsne_exp3_sl_1epochs_25%.html")
+plot_file = os.path.join(output_dir, "tsne_exp3_sl_1epochs_15%.html")
 fig.write_html(plot_file)
 print(f"Saved interactive plot to {plot_file}")
 
