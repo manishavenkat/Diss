@@ -1,4 +1,3 @@
-print('starting imports')
 import os
 import random
 import torch
@@ -28,7 +27,7 @@ from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_sc
 import csv
 import json
 
-print('finished imports')
+print('Starting Script')
 
 categories_to_include = set([21, 6, 12, 17, 15, 0, 25, 11])
 
@@ -119,7 +118,7 @@ def stratified_train_test_split(metadata_file, fraction=1.0, test_size=0.20, ran
     category_mapping = {old_id: new_id for new_id, old_id in enumerate(sorted(categories_to_include))}
     reverse_category_mapping = {new_id: old_id for old_id, new_id in category_mapping.items()}
 
-    if os.path.exists(split_file) or False:
+    if os.path.exists(split_file):
         with open(split_file, 'r') as f:
             split_data = json.load(f)
             with open(metadata_file, 'r') as f:
@@ -202,7 +201,19 @@ def stratified_train_test_split(metadata_file, fraction=1.0, test_size=0.20, ran
         }
         with open(split_file, 'w') as f:
             json.dump(split_data, f)
-    
+        
+        # Filter the metadata for both sets
+        test_metadata = [filtered_metadata[i] for i in test_indices if i < len(filtered_metadata)]
+        train_metadata = [filtered_metadata[i] for i in train_indices if i < len(filtered_metadata)]
+
+        # Save test and train metadata to a file
+        with open('test_metadata.json', 'w') as f:
+            json.dump(test_metadata, f, indent=2)
+        with open('train_metadata.json', 'w') as f:
+            json.dump(train_metadata, f, indent=2)
+
+        print("Metadata saved to 'test_metadata.json' and 'train_metadata.json'")
+
         return train_indices, test_indices, category_mapping, reverse_category_mapping, filtered_metadata
 
 def collate_data(batch):
@@ -230,14 +241,14 @@ train_indices, test_indices, category_mapping, reverse_category_mapping, filtere
 print('done stratifying')
 
 # Usage
-# train_dataset = GenreDataset(preprocessed_dir, filtered_metadata, train_indices, category_mapping)
+train_dataset = GenreDataset(preprocessed_dir, filtered_metadata, train_indices, category_mapping)
 test_dataset = GenreDataset(preprocessed_dir, filtered_metadata, test_indices, category_mapping)
 
 
 # print(f'Number of training samples: {len(train_dataset)}')
 print(f'Number of testing samples: {len(test_dataset)}')
 
-# train_loader = DataLoader(train_dataset, batch_size=8, shuffle=True, collate_fn=collate_data)
+train_loader = DataLoader(train_dataset, batch_size=8, shuffle=True, collate_fn=collate_data)
 test_loader = DataLoader(test_dataset, batch_size=8, shuffle=False,collate_fn=collate_data)
 
 print('finished loading')
@@ -249,7 +260,7 @@ model.load_state_dict(torch.load('SL/exp10_sl.pt', map_location=device))
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-def train_model(model, train_loader, criterion, optimizer, num_epochs=1, device='cuda'):
+def train_model(model, train_loader, criterion, optimizer, num_epochs=250, device='cuda'):
     train_losses = []
     
     for epoch in range(num_epochs):
@@ -287,18 +298,18 @@ def train_model(model, train_loader, criterion, optimizer, num_epochs=1, device=
     plt.ylabel('Loss')
     plt.title('Training Loss over Epochs')
     plt.legend()
-    plt.savefig(os.path.join("outputs/loss", f"loss_plot_{num_epochs}epochs_exp9_sl.png"))
+    plt.savefig(os.path.join("outputs/loss", f"loss_plot_{num_epochs}epochs_exp10_sl.png"))
     plt.close()
 
 # Train the model
-# train_model(model, train_loader, criterion, optimizer, num_epochs=1)
+train_model(model, train_loader, criterion, optimizer, num_epochs=250)
 
-# print(model)
+print(model)
 
-# # Print model's state_dict
-# print("Model's state_dict:")
-# for param_tensor in model.state_dict():
-#     print(param_tensor, "\t", model.state_dict()[param_tensor].size())
+# Print model's state_dict
+print("Model's state_dict:")
+for param_tensor in model.state_dict():
+    print(param_tensor, "\t", model.state_dict()[param_tensor].size())
 
 # # Print optimizer's state_dict
 # print("Optimizer's state_dict:")
@@ -427,7 +438,7 @@ plt.title('Confusion Matrix for Test Set', fontsize=16)
 plt.xticks(rotation=90, fontsize=10)
 plt.yticks(rotation=0, fontsize=10)
 plt.tight_layout()
-plt.savefig('confusion_matrix_exp9_sl.png', dpi=300)
+plt.savefig('confusion_matrix_exp10_sl.png', dpi=300)
 plt.close()
 
 print("saved confusion_matrix_exp6_sl.png")
@@ -495,7 +506,7 @@ fig.update_layout(
 fig.update_traces(marker=dict(size=5, opacity=0.7))
 
 output_dir = 'outputs/tsne'
-plot_file = os.path.join(output_dir, "tsne_exp9_sl.html")
+plot_file = os.path.join(output_dir, "tsne_exp10_sl.html")
 fig.write_html(plot_file)
 print(f"Saved interactive plot to {plot_file}")
 
@@ -519,7 +530,7 @@ plt.legend(title='Categories', title_fontsize=12, fontsize=10, loc='center left'
 # Adjust layout to prevent cutting off labels
 plt.tight_layout()
 
-plot_file = os.path.join(output_dir, "tsne_exp9_sl.png")
+plot_file = os.path.join(output_dir, "tsne_exp10_sl.png")
 plt.savefig(plot_file, dpi=300, bbox_inches='tight')
 print(f"Saved t-SNE plot to {plot_file}")
 
